@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<section class="home-content fadeFromLeft">
+  <div>
+    <img src="../assets/img/saving.svg" alt="">
+    <h1>Uma aplicação para concentrar suas finanças.</h1>
+    <p>Finances é uma plataforma que permite que você gerencie suas finanças.</p>
+  </div>
+    <div>
+      <a href="{{session.user ? '/finance' : '/user/login' }}">Comece a registrar agora</a>
+        </div>
+</section>
+
+{% endblock %}
+

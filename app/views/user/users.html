@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+
+{% block login %}
+<ul>
+  {% for user in users %}
+  <li>{{ user.username }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

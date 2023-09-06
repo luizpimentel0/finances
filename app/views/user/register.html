@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<section class="form-container fadeFromLeft">
+  <h1>Registre-se</h1>
+  <form method="post" action="/user/register">
+    <label for="username">Usuário</label>
+    <input type="text" id="username" name="username" placeholder="@user" required/>
+
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="user@email.com" required />
+
+    <label for="password">Senha:</label>
+    <input type="password" name="password" placeholder="********" required />
+
+    <button type="submit">Cadastrar</button>
+  </form>
+</section>
+{% endblock %}

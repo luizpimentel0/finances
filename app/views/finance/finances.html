@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<section class="finances-container">
+  {% if session.success %}
+    <div class="notification success">
+      <p>{{session.message}}</p>
+      <button type="button" onclick="closeNotification()">&times;</button>
+    </div>
+  {% endif %}
+  <h2>Suas finanças</h2>
+  <div class="cards fadeFromLeft">
+    <div class="card">
+      <h2>Entradas</h2>
+      <span>R$ {{income}}</span>
+    </div>
+    <div class="card">
+      <h2>Saídas</h2>
+      <span>R$ {{outflow}}</span>
+    </div>
+    <div class="card">
+      <h2>Saldo Total</h2>
+      <span>R$ {{balance}}</span>
+    </div>
+  </div>
+  <div class="finances fadeFromLeft">
+    <button type="button" id="btn" onclick="openModal()">Novo Registro</button>
+  </div>
+  <table class="fadeFromLeft">
+    <thead>
+      <th>Data</th>
+      <th>Descrição</th>
+      <th>Tipo</th>
+      <th>Valor</th>
+      {% for userFinance in userFinances %}
+        <tr id="{{userFinance.id}}">
+          <td>{{ userFinance.date }}</td>
+          <td>{{ userFinance.description }}</td>
+          <td>{{ userFinance.category }}</td>
+          <td class="{{userFinance.categoryClass}}">R$ {{ userFinance.value }}</td>
+          <td class="actions">
+            <a onclick="handleEdit('{{userFinance.id}}')"><img src="../../assets/img/edit.svg" alt="Edit Icon"></a>
+            <a href="/finance/delete/{{userFinance.id}}"><img src="../../assets/img/remove.svg" alt="Remove Icon"></a>
+          </td>
+        </tr>
+      {% endfor %}
+    </thead>
+  </table>
+  
+  <div class="modal-container" onclick="clickOutside(event)">
+   <div class="modal fadeFromLeft">
+    <h3 id="title-form">Novo Registro</h3>
+    <button type="button" class="close" onclick="closeModal()">&times;</button>
+    <form class="form-modal" action="/finance/register" method="post">
+      <label for="description">Descrição</label>
+      <input type="text" name="description" id="description" value="" required>
+
+      <label for="value">Valor</label>
+      <input type="number" name="value" id="value" required>
+
+      <label for="date">Data</label>
+      <input type="date" name="date" id="date" value="date" required>
+      
+      <label for="category">Categoria</label>
+      <select id="category" name="category" required>
+        <option value="">Selecione o tipo de transação</option>
+        <option value="income">Entrada</option>
+        <option value="outflow">Saída</option>
+      </select>
+      <button type="submit" id="btn-form">Registrar</button>
+      <button type="button" class="cancel" onclick="closeModal()">Cancelar</button>
+    </form>
+   </div> 
+  </div>
+</section>
+{% endblock %}

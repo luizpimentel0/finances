@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/../assets/css/style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+      <header>
+        <ul>
+          <li class="logo"><a href="/"><img src="../assets/img/logo.svg" alt="Logo"></a></li>
+          <div>
+            {% if session.user %}
+            <li>Olá {{session.user}}</li>
+            <li class="logout"><a href="user/logout">Sair <img src="../assets/img/logout.svg" alt="Logout icon"></a></li>
+            {% else %}
+              <li><a href="/user/register">Registre-se</a></li>
+              <li><a href="/user/login">Login</a></li>
+            {% endif %}
+          </div>
+        </ul>
+      </header>
+      <div class="container">
+        {% block content %}{% endblock %} 
+      </div>
+    </main>
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>
