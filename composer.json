@@ -1,5 +1,5 @@
 {
-  "name": "finances",
+  "name": "lviz/finances",
   "description": "simple crud",
   "autoload": {
     "psr-4": {
