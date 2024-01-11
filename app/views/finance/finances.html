@@ -9,6 +9,12 @@
       <button type="button" onclick="closeNotification()">&times;</button>
     </div>
   {% endif %}
+  {% if session.error %}
+    <div class="notification error">
+      <p>{{session.message}}</p>
+      <button type="button" onclick="closeNotification()">&times;</button>
+    </div>
+  {% endif %}
   <h2>Suas finanças</h2>
   <div class="cards fadeFromLeft">
     <div class="card">
@@ -57,7 +63,7 @@
       <input type="text" name="description" id="description" value="" required>
 
       <label for="value">Valor</label>
-      <input type="number" name="value" id="value" required>
+      <input type="number" name="value" id="value" step="any" min="0" required>
 
       <label for="date">Data</label>
       <input type="date" name="date" id="date" value="date" required>
