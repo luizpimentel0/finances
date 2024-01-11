@@ -12,7 +12,7 @@ abstract class Model
   }
 
 
-  public function all()
+  public function all(): array
   {
     $sql = "select * from {$this->table}";
     $list = $this->connection->query($sql);
@@ -21,7 +21,7 @@ abstract class Model
     return $list->fetchAll();
   }
 
-  public function getById(string $field, string $fieldValue)
+  public function getById(string $field, string $fieldValue): array
   {
     $query = "select * from {$this->table} WHERE {$field} = {$fieldValue}";
     $statement = $this->connection->query($query);
@@ -34,7 +34,7 @@ abstract class Model
     }
   }
 
-  public function insert(array $values)
+  public function insert(array $values): string | \PDOException
   {
     $query = "INSERT INTO {$this->table} (" . implode(',',  array_keys($values)) . ") VALUES (" . implode(',', (array_fill(0, count($values), '?'))) . ")";
     $statement = $this->connection->prepare($query);

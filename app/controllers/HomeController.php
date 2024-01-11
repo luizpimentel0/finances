@@ -2,12 +2,10 @@
 
 namespace App\controllers;
 
-use Core\Controller;
-
 class HomeController extends ContainerController
 {
-  
-  public function index()
+
+  public function index(): void
   {
     $this->view([
       'title' => 'Home'

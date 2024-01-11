@@ -9,7 +9,7 @@ class UserController extends ContainerController
 
   private $errors = [];
 
-  public function register()
+  public function register(): void
   {
     if ($_SESSION['user']) {
       header("Location: /finance");
@@ -31,8 +31,9 @@ class UserController extends ContainerController
       if (($password == null) || ($password == '')) {
         $this->errors[] = "O campo senha é obrigatório";
       }
-    
+
       $user = new User;
+      $user->index();
 
       $values = [
         'username' => $username,
@@ -58,7 +59,7 @@ class UserController extends ContainerController
     }
   }
 
-  public function login()
+  public function login(): void
   {
     if ($_SESSION['user']) {
       header("Location: /finance");
@@ -77,13 +78,16 @@ class UserController extends ContainerController
       }
 
       $user = new User();
+      $user->index();
+
       $userLogin = $user->login($email, $password);
       if (!array_key_exists('error', $userLogin)) {
         $_SESSION['user'] = $userLogin['username'];
         $_SESSION['userId'] = $userLogin['id'];
         header('Location: /finance');
       }
-      return $this->view([
+
+      $this->view([
         'error' => $userLogin['error'],
         'email' => $email
       ], 'user.login');
@@ -95,7 +99,7 @@ class UserController extends ContainerController
     }
   }
 
-  public function logout()
+  public function logout(): void
   {
     session_destroy();
     header('Location: /');
