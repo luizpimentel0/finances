@@ -8,11 +8,12 @@ use DateTime;
 
 class FinanceController extends ContainerController
 {
-  public function index()
+  public function index(): void
   {
     if (!$_SESSION['userId']) header('Location: /user/login');
 
     $finance = new Finance;
+    $finance->index();
 
     $userFinances = $finance->getById('user_id', $_SESSION['userId']);
 
@@ -56,7 +57,7 @@ class FinanceController extends ContainerController
     $_SESSION['success'] = false;
   }
 
-  public function register()
+  public function register(): void
   {
 
     if (!$_SESSION['userId']) header('Location: /user/login');
@@ -68,6 +69,14 @@ class FinanceController extends ContainerController
       $category    = $_POST['category'] ?? null;
 
       $finance = new Finance();
+
+      $value = str_replace(',', '.', $value);
+      if (!is_numeric($value)) {
+        $_SESSION['error'] = true;
+        $_SESSION['message'] = 'O campo valor deve ser um número. Tente novamente.';
+        header('Location: /finance', 400);
+        return;
+      }
 
       $values = [
         'description' => $description,
@@ -88,7 +97,7 @@ class FinanceController extends ContainerController
     }
   }
 
-  public function show($request)
+  public function show($request): void
   {
     if (!$_SESSION['userId']) header('Location: /user/login');
 
@@ -109,7 +118,7 @@ class FinanceController extends ContainerController
     echo $jsonResponse;
   }
 
-  public function edit($request)
+  public function edit($request): void
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $finance = new Finance();
@@ -138,7 +147,7 @@ class FinanceController extends ContainerController
     }
   }
 
-  public function delete($request)
+  public function delete($request): void
   {
     if (!$_SESSION['userId']) header('Location: /user/login');
 
