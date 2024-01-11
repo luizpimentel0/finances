@@ -7,13 +7,21 @@ function openModal() {
 }
 
 function closeModal() {
-  const descriptionInput = document.getElementById('description').value = ''
-  const valueInput = document.getElementById('value').value = ''
-  const date = document.getElementById('date').value = ''
-  const category = document.getElementById('category').value = ''
-  const bntForm = document.getElementById('btn-form').innerText = 'Registrar'
-  const titleForm = document.getElementById('title-form').innerText = ''
+  const descriptionInput = document.getElementById('description')
+  const valueInput = document.getElementById('value')
+  const dateInput = document.getElementById('date')
+  const categoryInput = document.getElementById('category')
+  const btnForm = document.getElementById('btn-form')
+  const titleForm = document.getElementById('title-form')
+  const form = document.querySelector('.form-modal')
+  form.action = '/finance/register'
 
+  descriptionInput.value = ''
+  valueInput.value = ''
+  dateInput.value = ''
+  categoryInput.value = ''
+  btnForm.innerText = 'Register'
+  titleForm.innerText = ''
   modal.classList.remove('active')
 }
 
@@ -30,17 +38,28 @@ function closeNotification() {
 }
 
 async function handleEdit(id) {
-  
+
   const response = await fetch(`/finance/show/${id}`)
   const json = await response.json();
 
-  const descriptionInput = document.getElementById('description').value = json.description
-  const valueInput = document.getElementById('value').value = json.value
-  const date = document.getElementById('date').value = json.date
-  const category = document.getElementById('category').value = json.category
-  const bntForm = document.getElementById('btn-form').innerText = 'Salvar'
-  const titleForm = document.getElementById('title-form').innerText = 'Edição de Registro'
-  const form = document.querySelector('.form-modal').action = `finance/edit/${id}`
+  const { description, value, date, category } = json
+
+  const descriptionInput = document.getElementById('description')
+  const valueInput = document.getElementById('value')
+  const dateInput = document.getElementById('date')
+  const categoryInput = document.getElementById('category')
+  const btnForm = document.getElementById('btn-form')
+  const titleForm = document.getElementById('title-form')
+  const form = document.querySelector('.form-modal')
+
+  descriptionInput.value = description
+  valueInput.value = value
+  dateInput.value = date
+  categoryInput.value = category
+  btnForm.innerText = 'Salvar'
+  titleForm.innerText = 'Edição de Registro'
+  form.action = `finance/edit/${id}`
+  modal.classList.remove('active')
 
   openModal();
 }
