@@ -175,7 +175,7 @@ form button:hover {
   padding: .75rem;
   width: 250px;
   height: 150px;
-  
+
   border-radius: 5px;
 }
 
@@ -208,7 +208,7 @@ table {
 
   background-color: #f1f7f7;
   color: #042222;
-  border-radius: 5px;  
+  border-radius: 5px;
 }
 
 td.income {
@@ -230,10 +230,6 @@ td.actions {
 
 td.actions img {
   padding: .25rem;
-} 
-
-td.actions img {
-
 }
 
 .error {
@@ -321,7 +317,7 @@ form .cancel {
   background-color: #00df7f;
 }
 
-.notification.success button {
+.notification button {
   position: absolute;
   border: none;
 
